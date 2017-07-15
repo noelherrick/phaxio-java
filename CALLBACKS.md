@@ -1,6 +1,6 @@
 # Writing callbacks (webhooks)
 
-Phaxio can send you a message via callback (or webhook) every time you send or recieve a fax.
+com.phaxio.Phaxio can send you a message via callback (or webhook) every time you send or recieve a fax.
 Writing a callback is the way you get notified you have a new fax sent to one of your numbers.
 Using Web API, it's simple to write a callback. Checkout the phaxio-java-callback-example repository for
 a full implementation.
@@ -23,4 +23,4 @@ File testFax = new File("test-fax.pdf");
 phaxio.fax.testRecieveCallback(testFax);
 ```
 
-&copy; 2016-2017 Phaxio
+&copy; 2016-2017 com.phaxio.Phaxio

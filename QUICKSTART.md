@@ -2,9 +2,9 @@
 
 ## Basics
 
-The Phaxio class is the entry point for any Phaxio operation.
+The com.phaxio.Phaxio class is the entry point for any com.phaxio.Phaxio operation.
 
-    Phaxio phaxio = new Phaxio(key, secret);
+    com.phaxio.Phaxio phaxio = new com.phaxio.Phaxio(key, secret);
     
 ### Getting your account status
 
@@ -15,7 +15,7 @@ The Phaxio class is the entry point for any Phaxio operation.
 
 ### Sending a fax
 
-At the heart of the Phaxio API is the ability to send a fax. You pass in a Map<String, Object> to create your fax:
+At the heart of the com.phaxio.Phaxio API is the ability to send a fax. You pass in a Map<String, Object> to create your fax:
 
     HashMap<String, Object> faxParams = new HashMap<>();
     faxParams.put("To", "8088675309");
@@ -24,7 +24,7 @@ At the heart of the Phaxio API is the ability to send a fax. You pass in a Map<S
 
 The fax object can be used to reference your fax later. Well, now, wasn't that simple?
     
-If you have more than one file, you can pass in a list and Phaxio will concatenate them into one fax:
+If you have more than one file, you can pass in a list and com.phaxio.Phaxio will concatenate them into one fax:
 
 	HashMap<String, Object> faxParams = new HashMap<>();
     faxParams.put("To", "8088675309");
@@ -38,7 +38,7 @@ If you have more than one file, you can pass in a list and Phaxio will concatena
 
 If you have a bunch of faxes going to one number, you might want to check out [batching](https://www.phaxio.com/docs/api/send/batching/).
 You first specify a batch delay. Then, you send as many faxes as you'd like to the number in question, 
-and when you're finished and the batch delay is expired, Phaxio will send them all as one long fax. Here's what that would look like:
+and when you're finished and the batch delay is expired, com.phaxio.Phaxio will send them all as one long fax. Here's what that would look like:
     
     HashMap<String, Object> fax1Params = new HashMap<>();
     fax1Params.put("To", "8088675309");
@@ -142,7 +142,7 @@ Or both:
 
 ### Provisioning a number
 
-You can ask Phaxio to get you a new number (you must specify an area code and country code):
+You can ask com.phaxio.Phaxio to get you a new number (you must specify an area code and country code):
 
     PhoneNumber newNumber = phaxio.phoneNumber.create("808", "1");
 
@@ -182,7 +182,7 @@ or you can retrieve a specific number:
     
 ### Release number
 
-You can a release number (give it back to Phaxio):
+You can a release number (give it back to com.phaxio.Phaxio):
 
     number.release();
 
@@ -214,7 +214,7 @@ To download the PNG of this newly generated code:
 
 ### Getting supported countries
 
-If you want to know what countries are supported by Phaxio, you can call this method:
+If you want to know what countries are supported by com.phaxio.Phaxio, you can call this method:
 
     List<Country> supportedCountries = phaxio.public.supportedCountry.list();
     
@@ -222,7 +222,7 @@ This returns a List of Country objects that have pricing and the services availa
  
 ### Testing callbacks (web hooks)
 
-So you've written a callback or a webhook you'd like tested. It's simple to have Phaxio send you a fax:
+So you've written a callback or a webhook you'd like tested. It's simple to have com.phaxio.Phaxio send you a fax:
 
     var fax = phaxio.fax.testRecieveCallback(new File("test-fax.pdf"));
     
@@ -241,4 +241,4 @@ You can also fake who the fax is from:
 
     var fax = phaxio.Fax.testRecieveCallback(new File("test-fax.pdf"), options);
 
-&copy; 2016-2017 Phaxio
+&copy; 2016-2017 com.phaxio.Phaxio
