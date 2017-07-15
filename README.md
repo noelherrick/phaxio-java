@@ -10,11 +10,11 @@ Second, go to [api settings](https://console.phaxio.com/apiSettings) and get you
 
 Third, add this library as a dependency in your pom.xml:
 
-<dependency>
-    <groupId>com.phaxio</groupId>
-    <artifactId>phaxio-client</artifactId>
-    <version>1.0</version>
-</dependency>
+    <dependency>
+        <groupId>com.phaxio</groupId>
+        <artifactId>phaxio-client</artifactId>
+        <version>1.0</version>
+    </dependency>
 
 Use [this guide](QUICKSTART.md) for basic usage.
 
@@ -26,10 +26,8 @@ This is a complete re-write and starts from scratch in its design. Please see th
 
 This lbirary now uses Phaxio API V2, so these methods have been removed and have no equivalent:
 
-- AttachPhaxCodeToPdf was removed
-- CreatePhaxCode is now GeneratePhaxCode
-- DownloadPhaxCodePng is now DownloadPhaxCode
-- GetHostedDocument was removed
+- Phaxcode.attachToPdf was removed
+- HostedDocument was removed
 
 ## Errors
 
