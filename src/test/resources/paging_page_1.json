@@ -28,7 +28,7 @@
         }
     ],
     "paging":{
-        "total":3,
+        "total":6,
         "per_page":3,
         "page":1
     }
