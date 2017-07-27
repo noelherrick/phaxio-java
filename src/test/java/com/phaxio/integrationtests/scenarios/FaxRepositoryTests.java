@@ -50,6 +50,12 @@ public class FaxRepositoryTests {
 
         fax.resend();
 
+        fax.file().getBytes();
+
+        fax.file().largeJpeg().getBytes();
+
+        fax.file().smallJpeg().getBytes();
+
         fax.file().delete();
 
         fax.delete();

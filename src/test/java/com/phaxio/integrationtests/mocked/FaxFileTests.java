@@ -2,6 +2,7 @@ package com.phaxio.integrationtests.mocked;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.phaxio.Phaxio;
+import com.phaxio.fixtures.BinaryFixtures;
 import com.phaxio.helpers.Responses;
 import com.phaxio.resources.FaxFile;
 import org.junit.Rule;
@@ -35,6 +36,44 @@ public class FaxFileTests {
         file.setClient(phaxio);
 
         assertArrayEquals(fileBytes, file.getBytes());
+    }
+
+    @Test
+    public void getsLargeThumbnail () throws IOException {
+        byte[] fileBytes = BinaryFixtures.getTestPhaxCode();
+
+        stubFor(get(urlEqualTo("/v2/faxes/1/file?thumbnail=l&api_secret=SECRET&api_key=KEY"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/octet")
+                        .withBody(fileBytes)));
+
+        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+
+        FaxFile file = new FaxFile(1);
+
+        file.setClient(phaxio);
+
+        assertArrayEquals(fileBytes, file.largeJpeg().getBytes());
+    }
+
+    @Test
+    public void getsSmallThumbnail () throws IOException {
+        byte[] fileBytes = BinaryFixtures.getTestPhaxCode();
+
+        stubFor(get(urlEqualTo("/v2/faxes/1/file?thumbnail=s&api_secret=SECRET&api_key=KEY"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/octet")
+                        .withBody(fileBytes)));
+
+        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+
+        FaxFile file = new FaxFile(1);
+
+        file.setClient(phaxio);
+
+        assertArrayEquals(fileBytes, file.smallJpeg().getBytes());
     }
 
     @Test
