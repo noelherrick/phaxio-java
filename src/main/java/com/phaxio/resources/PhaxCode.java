@@ -1,4 +1,4 @@
-package com.phaxio.entities;
+package com.phaxio.resources;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

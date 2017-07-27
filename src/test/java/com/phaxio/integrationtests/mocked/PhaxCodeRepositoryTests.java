@@ -2,7 +2,7 @@ package com.phaxio.integrationtests.mocked;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.phaxio.Phaxio;
-import com.phaxio.entities.PhaxCode;
+import com.phaxio.resources.PhaxCode;
 import com.phaxio.helpers.Responses;
 import org.junit.Rule;
 import org.junit.Test;

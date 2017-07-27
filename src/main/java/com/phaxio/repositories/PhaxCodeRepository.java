@@ -2,7 +2,7 @@ package com.phaxio.repositories;
 
 
 import com.phaxio.Phaxio;
-import com.phaxio.entities.PhaxCode;
+import com.phaxio.resources.PhaxCode;
 import com.phaxio.restclient.RestClient;
 import com.phaxio.restclient.entities.RestRequest;
 
