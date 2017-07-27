@@ -48,6 +48,11 @@ public class FaxRepositoryTests {
 
         options.put("file", testFile);
 
+        ArrayList<String> urls = new ArrayList<String>();
+        urls.add("http://google.com");
+
+        options.put("content_url[]", urls);
+
         Fax fax = phaxio.fax.create(options);
 
         verify(postRequestedFor(urlEqualTo("/v2/faxes"))
@@ -56,6 +61,8 @@ public class FaxRepositoryTests {
                 .withRequestBody(containing("file[]"))
                 .withRequestBody(containing("to"))
                 .withRequestBody(containing("2088675309"))
+                .withRequestBody(containing("content_url[]"))
+                .withRequestBody(containing("http://google.com"))
         );
 
         assertTrue(fax.id == 1234);
@@ -134,7 +141,7 @@ public class FaxRepositoryTests {
         verify(postRequestedFor(urlEqualTo("/v2/faxes"))
                 .withHeader("Content-Type", containing("multipart/form-data;"))
                 .withRequestBody(containing("test.pdf"))
-                .withRequestBody(containing("file[]"))
+                .withRequestBody(containing("file"))
                 .withRequestBody(containing("to"))
                 .withRequestBody(containing("2088675309"))
                 .withRequestBody(containing("direction"))

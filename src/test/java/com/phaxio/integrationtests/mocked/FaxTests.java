@@ -79,4 +79,26 @@ public class FaxTests {
 
         verify(postRequestedFor(urlEqualTo("/v2/faxes/1/resend")));
     }
+
+    @Test
+    public void resendsFaxWithCallback () throws IOException {
+        String json = Responses.json("/generic_success.json");
+
+        stubFor(post(urlEqualTo("/v2/faxes/1/resend"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json; charset=utf-8")
+                        .withBody(json)));
+
+        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+
+        Fax fax = new Fax();
+        fax.id = 1;
+        fax.setClient(phaxio);
+
+        fax.resend("google.com");
+
+        verify(postRequestedFor(urlEqualTo("/v2/faxes/1/resend"))
+                .withRequestBody(containing("google.com")));
+    }
 }
