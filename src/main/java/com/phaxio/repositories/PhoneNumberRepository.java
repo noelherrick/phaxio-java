@@ -1,6 +1,6 @@
 package com.phaxio.repositories;
 
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 import com.phaxio.resources.PhoneNumber;
 import com.phaxio.restclient.RestClient;
 import com.phaxio.restclient.entities.RestRequest;
@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class PhoneNumberRepository
 {
-    private Phaxio client;
+    private Requests client;
 
-    public PhoneNumberRepository(Phaxio client)
+    public PhoneNumberRepository(Requests client)
     {
         this.client = client;
     }

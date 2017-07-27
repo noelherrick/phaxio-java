@@ -1,13 +1,13 @@
 package com.phaxio.repositories;
 
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 import com.phaxio.entities.Country;
 import com.phaxio.restclient.entities.RestRequest;
 
 public class SupportedCountriesRepository {
-    private Phaxio client;
+    private Requests client;
 
-    public SupportedCountriesRepository(Phaxio client) {
+    public SupportedCountriesRepository(Requests client) {
         this.client = client;
     }
 

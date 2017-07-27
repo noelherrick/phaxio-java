@@ -1,6 +1,6 @@
 package com.phaxio.resources;
 
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 import com.phaxio.restclient.entities.RestRequest;
 import org.apache.commons.io.FileUtils;
 
@@ -9,11 +9,11 @@ import java.io.IOException;
 
 public class FaxFile
 {
-    public void setClient(Phaxio client) {
+    public void setClient(Requests client) {
         this.client = client;
     }
 
-    private Phaxio client;
+    private Requests client;
     private int faxId;
     private String thumbnail;
 

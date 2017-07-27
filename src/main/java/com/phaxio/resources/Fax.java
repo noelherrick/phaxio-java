@@ -1,19 +1,17 @@
 package com.phaxio.resources;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 import com.phaxio.entities.Recipient;
 import com.phaxio.restclient.entities.RestRequest;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Fax
 {
-    private Phaxio client;
-
+    private Requests client;
 
     private FaxFile file;
 
@@ -29,7 +27,7 @@ public class Fax
         return file;
     }
 
-    public void setClient (Phaxio client) {
+    public void setClient (Requests client) {
         this.client = client;
     }
 

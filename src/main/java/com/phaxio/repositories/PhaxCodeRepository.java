@@ -1,15 +1,15 @@
 package com.phaxio.repositories;
 
 
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 import com.phaxio.resources.PhaxCode;
 import com.phaxio.restclient.RestClient;
 import com.phaxio.restclient.entities.RestRequest;
 
 public class PhaxCodeRepository {
-    private Phaxio client;
+    private Requests client;
 
-    public PhaxCodeRepository (Phaxio client) {
+    public PhaxCodeRepository (Requests client) {
         this.client = client;
     }
 

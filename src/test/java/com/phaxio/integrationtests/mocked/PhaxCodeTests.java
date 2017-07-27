@@ -4,6 +4,7 @@ import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.phaxio.Phaxio;
 import com.phaxio.fixtures.BinaryFixtures;
 import com.phaxio.resources.PhaxCode;
+import com.phaxio.services.Requests;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -28,12 +29,12 @@ public class PhaxCodeTests {
                         .withHeader("Content-Type", "application/octet")
                         .withBody(expectedBytes)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         PhaxCode code = new PhaxCode();
 
         code.identifier = "1234";
-        code.setClient(phaxio);
+        code.setClient(client);
 
         byte[] retrievedBytes = code.png();
 
@@ -50,11 +51,11 @@ public class PhaxCodeTests {
                         .withHeader("Content-Type", "application/octet")
                         .withBody(expectedBytes)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         PhaxCode code = new PhaxCode();
 
-        code.setClient(phaxio);
+        code.setClient(client);
 
         byte[] retrievedBytes = code.png();
 

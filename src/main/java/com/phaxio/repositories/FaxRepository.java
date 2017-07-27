@@ -1,6 +1,6 @@
 package com.phaxio.repositories;
 
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 import com.phaxio.resources.Fax;
 import com.phaxio.restclient.entities.RestRequest;
 import org.apache.commons.io.IOUtils;
@@ -14,9 +14,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class FaxRepository {
-    private Phaxio client;
+    private Requests client;
 
-    public FaxRepository (Phaxio client) {
+    public FaxRepository (Requests client) {
         this.client = client;
     }
 
@@ -100,7 +100,7 @@ public class FaxRepository {
      * Sends a request to Phaxio to test a callback (web hook).
      * @param options The options for the callback - see the API documentation for the parameter names
      */
-    public void testRecieveCallback(Map<String, Object> options)
+    public void testReceiveCallback(Map<String, Object> options)
     {
         RestRequest request = new RestRequest();
         request.resource = "faxes";

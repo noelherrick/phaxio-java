@@ -1,6 +1,6 @@
 package com.phaxio.repositories;
 
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 import com.phaxio.entities.AreaCode;
 import com.phaxio.restclient.entities.RestRequest;
 
@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class AreaCodeRepository
 {
-    private Phaxio client;
+    private Requests client;
 
-    public AreaCodeRepository(Phaxio client)
+    public AreaCodeRepository(Requests client)
     {
         this.client = client;
     }

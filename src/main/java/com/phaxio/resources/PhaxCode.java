@@ -2,7 +2,7 @@ package com.phaxio.resources;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 import com.phaxio.restclient.RestClient;
 import com.phaxio.restclient.entities.RestRequest;
 
@@ -13,9 +13,9 @@ import java.util.Date;
  */
 public class PhaxCode
 {
-    private Phaxio client;
+    private Requests client;
 
-    public void setClient (Phaxio client) {
+    public void setClient (Requests client) {
         this.client = client;
     }
 

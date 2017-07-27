@@ -5,6 +5,7 @@ import com.phaxio.Phaxio;
 import com.phaxio.fixtures.BinaryFixtures;
 import com.phaxio.helpers.Responses;
 import com.phaxio.resources.FaxFile;
+import com.phaxio.services.Requests;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -29,11 +30,11 @@ public class FaxFileTests {
                         .withHeader("Content-Type", "application/pdf")
                         .withBody(fileBytes)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         FaxFile file = new FaxFile(1);
 
-        file.setClient(phaxio);
+        file.setClient(client);
 
         assertArrayEquals(fileBytes, file.getBytes());
     }
@@ -48,11 +49,11 @@ public class FaxFileTests {
                         .withHeader("Content-Type", "application/octet")
                         .withBody(fileBytes)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         FaxFile file = new FaxFile(1);
 
-        file.setClient(phaxio);
+        file.setClient(client);
 
         assertArrayEquals(fileBytes, file.largeJpeg().getBytes());
     }
@@ -67,11 +68,11 @@ public class FaxFileTests {
                         .withHeader("Content-Type", "application/octet")
                         .withBody(fileBytes)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         FaxFile file = new FaxFile(1);
 
-        file.setClient(phaxio);
+        file.setClient(client);
 
         assertArrayEquals(fileBytes, file.smallJpeg().getBytes());
     }
@@ -86,10 +87,10 @@ public class FaxFileTests {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBody(json)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         FaxFile file = new FaxFile(1);
-        file.setClient(phaxio);
+        file.setClient(client);
         file.delete();
 
         verify(deleteRequestedFor(urlEqualTo("/v2/faxes/1/file?api_secret=SECRET&api_key=KEY")));

@@ -1,10 +1,10 @@
 package com.phaxio.repositories;
 
-import com.phaxio.Phaxio;
+import com.phaxio.services.Requests;
 
 public class PublicRepository
 {
-    public PublicRepository(Phaxio client)
+    public PublicRepository(Requests client)
     {
         areaCode = new AreaCodeRepository(client);
         supportedCountry = new SupportedCountriesRepository(client);

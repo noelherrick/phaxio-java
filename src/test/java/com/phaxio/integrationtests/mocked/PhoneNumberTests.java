@@ -1,9 +1,9 @@
 package com.phaxio.integrationtests.mocked;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.phaxio.Phaxio;
 import com.phaxio.helpers.Responses;
 import com.phaxio.resources.PhoneNumber;
+import com.phaxio.services.Requests;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -27,11 +27,11 @@ public class PhoneNumberTests {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBody(json)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         PhoneNumber number = new PhoneNumber();
         number.number = "8088675308";
-        number.setClient(phaxio);
+        number.setClient(client);
 
         number.release();
 

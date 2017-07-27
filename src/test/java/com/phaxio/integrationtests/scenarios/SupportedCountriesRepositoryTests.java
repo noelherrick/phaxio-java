@@ -3,6 +3,7 @@ package com.phaxio.integrationtests.scenarios;
 import com.phaxio.Phaxio;
 import com.phaxio.entities.Country;
 import com.phaxio.helpers.Config;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 public class SupportedCountriesRepositoryTests {
     @Test
     public void listsCountries () throws IOException {

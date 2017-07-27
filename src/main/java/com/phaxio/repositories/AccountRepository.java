@@ -1,13 +1,13 @@
 package com.phaxio.repositories;
 
-import com.phaxio.Phaxio;
 import com.phaxio.entities.Account;
 import com.phaxio.restclient.entities.RestRequest;
+import com.phaxio.services.Requests;
 
 public class AccountRepository {
-    private Phaxio client;
+    private Requests client;
 
-    public AccountRepository(Phaxio client)
+    public AccountRepository(Requests client)
     {
         this.client = client;
     }

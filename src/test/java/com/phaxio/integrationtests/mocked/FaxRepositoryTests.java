@@ -5,6 +5,7 @@ import com.phaxio.Phaxio;
 import com.phaxio.entities.Recipient;
 import com.phaxio.helpers.Responses;
 import com.phaxio.resources.Fax;
+import com.phaxio.services.Requests;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -136,7 +137,7 @@ public class FaxRepositoryTests {
         options.put("file", testFile);
         options.put("to", "2088675309");
 
-        phaxio.fax.testRecieveCallback(options);
+        phaxio.fax.testReceiveCallback(options);
 
         verify(postRequestedFor(urlEqualTo("/v2/faxes"))
                 .withHeader("Content-Type", containing("multipart/form-data;"))
@@ -159,11 +160,11 @@ public class FaxRepositoryTests {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBody(json)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         Fax fax = new Fax();
         fax.id = 1;
-        fax.setClient(phaxio);
+        fax.setClient(client);
 
         fax.delete();
 

@@ -4,6 +4,7 @@ import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.phaxio.Phaxio;
 import com.phaxio.helpers.Responses;
 import com.phaxio.resources.Fax;
+import com.phaxio.services.Requests;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -27,11 +28,11 @@ public class FaxTests {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBody(json)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         Fax fax = new Fax();
         fax.id = 1;
-        fax.setClient(phaxio);
+        fax.setClient(client);
 
         fax.delete();
 
@@ -48,11 +49,11 @@ public class FaxTests {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBody(json)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         Fax fax = new Fax();
         fax.id = 1;
-        fax.setClient(phaxio);
+        fax.setClient(client);
 
         fax.cancel();
 
@@ -69,11 +70,11 @@ public class FaxTests {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBody(json)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         Fax fax = new Fax();
         fax.id = 1;
-        fax.setClient(phaxio);
+        fax.setClient(client);
 
         fax.resend();
 
@@ -90,11 +91,11 @@ public class FaxTests {
                         .withHeader("Content-Type", "application/json; charset=utf-8")
                         .withBody(json)));
 
-        Phaxio phaxio = new Phaxio("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
+        Requests client = new Requests("KEY", "SECRET", "http://localhost:%s/v2/", TEST_PORT);
 
         Fax fax = new Fax();
         fax.id = 1;
-        fax.setClient(phaxio);
+        fax.setClient(client);
 
         fax.resend("google.com");
 
