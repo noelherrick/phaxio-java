@@ -8,6 +8,9 @@ import com.phaxio.restclient.entities.RestRequest;
 
 import java.util.Date;
 
+/**
+ * A PhaxCode is a barcode that Phaxio generates, which can be embedded with metadata.
+ */
 public class PhaxCode
 {
     private Phaxio client;

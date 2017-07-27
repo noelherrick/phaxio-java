@@ -6,6 +6,9 @@ import com.phaxio.restclient.entities.RestRequest;
 
 import java.util.Date;
 
+/**
+ * A phone number that you can use to send faxes.
+ */
 public class PhoneNumber
 {
     private Phaxio client;
@@ -27,7 +30,7 @@ public class PhoneNumber
     public String country;
 
     @JsonProperty("cost")
-    public int Cost;
+    public int cost;
 
     @JsonProperty("last_billed_at")
     public Date lastBilled;

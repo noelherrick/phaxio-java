@@ -8,7 +8,11 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
@@ -21,7 +25,7 @@ public class PhoneNumberRepositoryTests {
     public WireMockRule wireMockRule = new WireMockRule(TEST_PORT);
 
     @Test
-    public void createsNumber () throws IOException {
+    public void createsNumber () throws IOException, ParseException {
         String json = Responses.json("/provision_number.json");
 
         stubFor(post(urlEqualTo("/v2/phone_numbers"))
@@ -35,6 +39,19 @@ public class PhoneNumberRepositoryTests {
         PhoneNumber number = phaxio.phoneNumber.create("1", "808");
 
         assertEquals("+18475551234", number.number);
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        Date lastBilledAt = format.parse("2016-06-16T15:45:32-0600");
+        Date provisionedAt = format.parse("2016-06-16T15:45:32-0600");
+
+        assertEquals("Northbrook", number.city);
+        assertEquals("Illinois", number.state);
+        assertEquals("United States", number.country);
+        assertEquals(200, number.cost);
+        assertEquals(lastBilledAt, number.lastBilled);
+        assertEquals(provisionedAt, number.provisioned);
+        assertEquals("http://example.com", number.callbackUrl);
     }
 
     @Test

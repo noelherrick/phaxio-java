@@ -41,5 +41,14 @@ public class SupportedCountriesRepositoryTests {
         }
 
         assertEquals(3, countryList.size());
+
+        Country country = countryList.get(0);
+
+        assertEquals("United States", country.name);
+        assertEquals("US", country.alpha2);
+        assertEquals("1", country.countryCode);
+        assertEquals(7, country.pricePerPage);
+        assertEquals("full", country.sendSupport);
+        assertEquals("fullest", country.receiveSupport);
     }
 }

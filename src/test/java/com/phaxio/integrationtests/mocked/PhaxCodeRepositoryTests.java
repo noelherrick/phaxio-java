@@ -8,6 +8,10 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.assertEquals;
@@ -36,7 +40,7 @@ public class PhaxCodeRepositoryTests {
     }
 
     @Test
-    public void retrieveDefaultPhaxCode () throws IOException {
+    public void retrieveDefaultPhaxCode () throws IOException, ParseException {
         String json = Responses.json("/phax_code.json");
 
         stubFor(get(urlEqualTo("/v2/phax_code.json?api_secret=SECRET&api_key=KEY"))
@@ -50,6 +54,13 @@ public class PhaxCodeRepositoryTests {
         PhaxCode code = phaxio.phaxCode.retrieve();
 
         assertEquals("1234", code.identifier);
+        assertEquals("some_stuff", code.metadata);
+
+        DateFormat format = new SimpleDateFormat("");
+
+        Date createdAt = format.parse("2015-09-02T11:28:02-0500");
+
+        assertEquals(createdAt, code.createdAt);
     }
 
     @Test

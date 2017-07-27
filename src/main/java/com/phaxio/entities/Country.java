@@ -2,6 +2,9 @@ package com.phaxio.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Represents the state of Phaxio support for a country.
+ */
 public class Country
 {
     @JsonProperty("name")

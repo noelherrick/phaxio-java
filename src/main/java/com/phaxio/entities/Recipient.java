@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+/**
+ * A fax recipient
+ */
 public class Recipient
 {
     @JsonProperty("phone_number")

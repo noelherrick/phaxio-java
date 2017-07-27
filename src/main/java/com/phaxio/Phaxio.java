@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
+/**
+ * The Phaxio API client.
+ */
 public class Phaxio {
     private static final String PHAXIO_ENDPOINT = "https://api.phaxio.com:%s/v2/";
     private static final int PHAXIO_PORT = 443;
@@ -244,13 +244,21 @@ public class Phaxio {
 
     private void addClient(Object object, Class clazz) {
         try {
-            java.lang.reflect.Method method = clazz.getMethod("setClient", Phaxio.class);
+            java.lang.reflect.Method[] methods = clazz.getMethods();
+
+            java.lang.reflect.Method method = null;
+
+            Class[] parameterTypes = new Class[] {Phaxio.class};
+
+            for (java.lang.reflect.Method m : methods) {
+                if (m.getName().equals("setClient") && Arrays.equals(m.getParameterTypes(), parameterTypes)) {
+                    method = m;
+                }
+            }
 
             if (method != null) {
                 method.invoke(object, this);
             }
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (InvocationTargetException e) {

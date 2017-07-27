@@ -13,6 +13,7 @@ import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class AreaCodeRepositoryTests {
     private static final int TEST_PORT = 8089;
@@ -41,5 +42,14 @@ public class AreaCodeRepositoryTests {
         }
 
         assertEquals(3, codeList.size());
+
+        AreaCode code = codeList.get(2);
+
+        assertEquals("1", code.countryCode);
+        assertEquals("203", code.areaCode);
+        assertEquals("Bridgeport, Danbury, Meriden", code.city);
+        assertEquals("Connecticut", code.state);
+        assertEquals("United States", code.country);
+        assertFalse(code.tollFree);
     }
 }

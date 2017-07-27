@@ -2,6 +2,7 @@ package com.phaxio.integrationtests.mocked;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.phaxio.Phaxio;
+import com.phaxio.entities.Recipient;
 import com.phaxio.helpers.Responses;
 import com.phaxio.resources.Fax;
 import org.junit.Rule;
@@ -10,10 +11,10 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -61,10 +62,10 @@ public class FaxRepositoryTests {
     }
 
     @Test
-    public void retrievesFax () throws IOException {
+    public void retrievesFax () throws IOException, ParseException {
         String json = Responses.json("/fax_info.json");
 
-        stubFor(get(urlEqualTo("/v2/faxes/1?api_key=KEY&api_secret=SECRET"))
+        stubFor(get(urlEqualTo("/v2/faxes/1?api_secret=SECRET&api_key=KEY"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json; charset=utf-8")
@@ -74,7 +75,38 @@ public class FaxRepositoryTests {
 
         Fax fax = phaxio.fax.retrieve(1);
 
-        assertTrue(fax.id == 123456);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+        Date createdAt = format.parse("2015-09-02T11:28:02-0500");
+        Date completedAt = format.parse("2015-09-02T11:28:54-0500");
+
+        assertEquals(123456, fax.id);
+        assertEquals("sent", fax.direction);
+        assertEquals(3, fax.pageCount);
+        assertEquals("success", fax.status);
+        assertTrue(fax.isTest);
+        assertEquals(createdAt, fax.createdAt);
+        assertEquals(completedAt, fax.completedAt);
+        assertEquals(21, fax.costInCents);
+        assertEquals("123", fax.fromNumber);
+        assertEquals("1234", fax.tags.get("order_id"));
+        assertEquals("321", fax.toNumber);
+        assertEquals("Caller", fax.callerId);
+        assertEquals(42, fax.errorId);
+        assertEquals("error_type", fax.errorType);
+        assertEquals("error_message", fax.errorMessage);
+
+        Recipient recipient = fax.recipients.get(0);
+
+        assertEquals("+14141234567", recipient.phoneNumber);
+        assertEquals(completedAt, recipient.completedAt);
+        assertEquals("success", recipient.status);
+        assertEquals(41, recipient.errorId);
+        assertEquals("recipient_error_type", recipient.errorType);
+        assertEquals("recipient_error_message", recipient.errorMessage);
+        assertEquals(3, recipient.retryCount);
+        assertEquals(14400, recipient.bitrate);
+        assertEquals(8040, recipient.resolution);
     }
 
     @Test
